@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+ini_set('max_execution_time', 300);
+require 'boot.php';
+
+use Symfony\Component\Console\CommandLoader\FactoryCommandLoader;
+
+/*
+ * Register symphony console application
+ */
+$commandLoader = new FactoryCommandLoader([
+    'import' => function () {
+        return new \Commands\ImportCommand();
+    },
+]);
+
+$application = new Symfony\Component\Console\Application();
+$application->setCommandLoader($commandLoader);
+
+$application->run();
+
+
